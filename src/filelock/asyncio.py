@@ -319,6 +319,23 @@ class BaseAsyncFileLock(BaseFileLock, metaclass=AsyncFileLockMeta):
         msg = "Do not use `with` for asyncio locks, use `async with` instead."
         raise NotImplementedError(msg)
 
+    def __exit__(  # noqa: D105
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> NoReturn:
+        """
+        Replace old __exit__ method to avoid using it.
+
+        NOTE: DO NOT USE `with` FOR ASYNCIO LOCKS, USE `async with` INSTEAD.
+
+        :raises NotImplementedError: always — use ``async with`` instead.
+
+        """
+        msg = "Do not use `with` for asyncio locks, use `async with` instead."
+        raise NotImplementedError(msg)
+
     async def __aenter__(self) -> Self:
         """
         Acquire the lock.
