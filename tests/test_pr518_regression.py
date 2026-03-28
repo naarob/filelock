@@ -110,8 +110,9 @@ def test_del_after_loop_close_does_not_raise(
             asyncio.set_event_loop(None)
 
         # __del__ called with no running loop — must not raise RuntimeError
+        # Direct __del__() call is intentional here — we're testing the method itself.
         try:
-            lock.__del__()
+            lock.__del__()  # noqa: PLC2801
         except RuntimeError as exc:
             errors.append(exc)
 

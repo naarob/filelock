@@ -319,7 +319,7 @@ class BaseAsyncFileLock(BaseFileLock, metaclass=AsyncFileLockMeta):
         msg = "Do not use `with` for asyncio locks, use `async with` instead."
         raise NotImplementedError(msg)
 
-    def __exit__(  # noqa: D105
+    def __exit__(
         self,
         exc_type: type[BaseException] | None,
         exc_value: BaseException | None,
